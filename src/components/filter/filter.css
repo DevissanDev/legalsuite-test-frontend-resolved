@@ -1,0 +1,19 @@
+/* Scroll minimalista tipo tableta */
+.scroll-thin {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #d1d5db #f9fafb; /* Firefox: thumb | track */
+}
+
+/* Chrome, Edge, Safari */
+.scroll-thin::-webkit-scrollbar {
+  width: 6px; /* ancho de la barra */
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: #f9fafb; /* fondo clarito */
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* gris clarito */
+  border-radius: 9999px; /* redondeado */
+}

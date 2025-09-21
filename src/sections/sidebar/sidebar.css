@@ -1,0 +1,9 @@
+.sidebar {
+  background-color: var(--primary-color);
+}
+.cerrarsecion {
+  background-color: var(--ternary-color);
+}
+.cerrarsecionconteiner {
+  background-color: rgba(95, 95, 95, 0.379);
+}
