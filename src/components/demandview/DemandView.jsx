@@ -10,7 +10,7 @@ export function DemandView({
   documents,
 }) {
   return (
-    <article className="flex flex-col max-w-100  h-[100vh]  bg-white p-6 justify-between  shadow-md box-border">
+    <article className="flex flex-col max-w-120   h-[100vh]  bg-white p-6 justify-between  shadow-md box-border">
       <div className="flex flex-col gap-3 ">
         <div className="flex justify-between gap-5">
           <h2 style={{ color: "#374E30" }} className="font-bold text-xl">

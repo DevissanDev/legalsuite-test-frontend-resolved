@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { DemandView } from "../../components";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // <-- Importa Framer Motion
-
+import { motion, AnimatePresence } from "framer-motion";
 export function Demand({
   title,
   status,
@@ -34,7 +33,7 @@ export function Demand({
   return (
     <article
       onClick={toggleDemandView}
-      className="flex max-w-100 flex-col w-full h-full min-w-70  gap-3 bg-white p-6  rounded-xl shadow-md box-border cursor-pointer"
+      className="flex max-w-150 flex-col w-full h-full min-w-70  gap-3 bg-white p-6  rounded-xl shadow-md box-border cursor-pointer"
       ref={demandRef}
     >
       <div className="flex justify-between gap-5 ">

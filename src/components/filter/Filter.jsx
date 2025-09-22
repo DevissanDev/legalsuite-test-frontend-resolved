@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useFetch } from "../../hooks/UseFetch";
+import "./filter.css";
 
-export function Filter({ selected, setSelected, onApplyFilters }) {
+export function Filter({ filters, setFilters }) {
   const [open, setOpen] = useState(false);
 
   // Categorías desplegables
@@ -27,31 +28,24 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
   };
 
   const handleChange = (field, value) => {
-    setSelected((prev) => {
-      const isSelected = prev[field].includes(value);
-      return {
-        ...prev,
-        [field]: isSelected
-          ? prev[field].filter((v) => v !== value)
-          : [...prev[field], value],
-      };
-    });
-  };
-
-  const applyFilters = () => {
-    onApplyFilters(selected);
-    setOpen(false);
+    setFilters((prev) => ({
+      ...prev,
+      [field]: prev[field] === value ? "" : value,
+    }));
   };
 
   return (
-    <div className="relative inline-block">
+    <div className="md:relative inline-block sm:w-72">
       {/* Botón abrir */}
       <button
         onClick={() => setOpen(!open)}
-        className="p-2 rounded-md border-2 border-gray-300 flex items-center gap-2 bg-white hover:bg-gray-100 pr-10 text-gray-500"
+        style={{ borderColor: "#7CAD39", color: "#7CAD39" }}
+        className="p-2 rounded-md border-2 flex items-center gap-2 bg-white hover:bg-gray-100 text-gray-500 w-10 sm:w-12 h-12 justify-center md:w-70 md:h-auto md:justify-start"
       >
-        <img src="/images/filter.svg" alt="Filtro" className="w-5 h-5" />
-        <p>Filtrar Por</p>
+        <span className="flex items-center gap-2 whitespace-nowrap ">
+          <img src="/images/filter.svg" alt="Filtro" className="w-5 h-5" />
+          <span className="hidden md:inline">Filtrar Por</span>
+        </span>
       </button>
 
       {/* Overlay */}
@@ -64,13 +58,16 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
 
       {/* Panel */}
       {open && (
-        <div className="absolute top-12 left-0 w-72 bg-white shadow-lg rounded-lg z-50">
+        <div className="absolute md:top-12 md:left-0 md:bottom-auto md:w-72 w-full left-0 bottom-0 top-auto bg-white shadow-lg rounded-t-lg z-50 md:rounded-lg">
           <div className="divide-y divide-gray-200">
             {/* Cliente */}
-            <div>
+            <div className="px-4 py-2">
+              <div className="md:hidden text-xl font-bold mb-3">
+                Filtrar Por
+              </div>
               <button
                 onClick={() => toggleCategory("cliente")}
-                className="w-full flex justify-between items-center px-4 py-2 font-medium hover:bg-gray-50"
+                className="w-full flex justify-between items-center  font-medium hover:bg-gray-50"
               >
                 Cliente
                 <img
@@ -82,14 +79,14 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
                 />
               </button>
               {expanded.cliente && (
-                <div className="px-6 pb-4 flex flex-col gap-2 max-h-40 overflow-y-auto">
+                <div className="px-6 pb-4 flex flex-col gap-2 max-h-40 overflow-y-auto scroll-thin ">
                   {loadingClients && <p>Cargando...</p>}
                   {clients?.map((client) => (
                     <label key={client.id} className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         className="form-checkbox text-green-600 rounded-none"
-                        checked={selected.client.includes(client.name)}
+                        checked={filters.client === client.name}
                         onChange={() => handleChange("client", client.name)}
                       />
                       {client.name}
@@ -122,7 +119,7 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
                       <input
                         type="checkbox"
                         className="form-checkbox text-green-600 rounded-none"
-                        checked={selected.status.includes(status.name)}
+                        checked={filters.status === status.name}
                         onChange={() => handleChange("status", status.name)}
                       />
                       {status.name}
@@ -155,7 +152,7 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
                       <input
                         type="checkbox"
                         className="form-checkbox text-green-600 rounded-none"
-                        checked={selected.demandType.includes(type.name)}
+                        checked={filters.demandType === type.name}
                         onChange={() => handleChange("demandType", type.name)}
                       />
                       {type.name}
@@ -167,11 +164,10 @@ export function Filter({ selected, setSelected, onApplyFilters }) {
           </div>
 
           {/* Botón aplicar */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="px-15 pb-5 pt-7 border-t border-gray-200 md:p-4">
             <button
-              style={{ backgroundColor: "#7CAD39" }}
-              onClick={applyFilters}
-              className="w-full py-2 text-white rounded-md hover:bg-green-700 transition"
+              onClick={() => setOpen(false)}
+              className="w-full py-2 text-white rounded-md transition box-border md:bg-[#7CAD39] bg-gray-400"
             >
               Aplicar filtros
             </button>

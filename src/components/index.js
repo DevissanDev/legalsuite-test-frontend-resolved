@@ -7,3 +7,4 @@ export * from "./cdocument/CDocument";
 export * from "./filter/Filter";
 export * from "./activefilters/ActiveFilters";
 export * from "./filterspanel/FiltersPanel";
+export * from "./searchbar/SearchBar";

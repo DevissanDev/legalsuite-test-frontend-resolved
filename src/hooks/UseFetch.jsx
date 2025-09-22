@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
 export function useFetch(url) {
-  const [data, setData] = useState(null); // lista de elementos
-  const [loading, setLoading] = useState(true); // estado de carga
-  const [error, setError] = useState(null); // error si ocurre
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!url) return;
 
-    let isMounted = true; // evita actualizar estado si el componente se desmonta
+    let isMounted = true;
 
     const fetchData = async () => {
       setLoading(true);
@@ -38,7 +38,6 @@ export function useFetch(url) {
 
     fetchData();
 
-    // cleanup para desmontaje
     return () => {
       isMounted = false;
     };
